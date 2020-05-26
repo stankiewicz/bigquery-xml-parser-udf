@@ -135,7 +135,7 @@ function parse(source,defaultNSMapCopy,entityMap,domBuilder,errorHandler){
 						copyLocator(backup,locator);
 					}
 					el.closed = el.closed||fixSelfClosed(source,end,el.tagName,closeMap);
-					appendElement(el,domBuilder,parseStack);
+					appendElementSax(el,domBuilder,parseStack);
 					
 					
 					if(el.uri === 'http://www.w3.org/1999/xhtml' && !el.closed){
@@ -166,7 +166,7 @@ function copyLocator(f,t){
 }
 
 /**
- * @see #appendElement(source,elStartEnd,el,selfClosed,entityReplacer,domBuilder,parseStack);
+ * @see #appendElementSax(source,elStartEnd,el,selfClosed,entityReplacer,domBuilder,parseStack);
  * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
  */
 function parseElementStartPart(source,start,el,entityReplacer,errorHandler){
@@ -326,7 +326,7 @@ function parseElementStartPart(source,start,el,entityReplacer,errorHandler){
 /**
  * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
  */
-function appendElement(el,domBuilder,parseStack){
+function appendElementSax(el,domBuilder,parseStack){
 	var tagName = el.tagName;
 	var localNSMap = null;
 	var currentNSMap = parseStack[parseStack.length-1].currentNSMap;
